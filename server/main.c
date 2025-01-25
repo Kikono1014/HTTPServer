@@ -9,8 +9,8 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 
-#include "request.h"
-#include "response.h"
+#include "./request/request.h"
+#include "./response/response.h"
 
 #define BUFFER_SIZE 1024
 
