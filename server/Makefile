@@ -2,11 +2,12 @@ CC = gcc
 BINDIR = ../bin/
 BINNAME = server
 OUT = $(BINDIR)$(BINNAME)
+FILES = ./request/request.c ./response/response.c ./main.c
 
-make:
-	gcc ./request/request.c ./response/response.c ./main.c -o $(OUT)
+build: $(FILES)
+	gcc $(FILES) -o $(OUT)
 
-# .PHONY: clean
-
-# clean:
-# 	rm *.o $(OUT)
+run:
+	make build;
+	printf "\n\n"
+	$(OUT)
