@@ -1,22 +1,27 @@
 #include "response.h"
 #include <stdio.h>
 #include <string.h>
+#include "../consts.h"
 
-
-char *build_response(Response response)
+size_t build_response(u_int8_t buffer[BUFFER_SIZE], Response response)
 {
-
-    char *data = malloc(8 + 1 + 3 + 1 + strlen(response.status)
-        + 1 + strlen(response.headers)
-        + 1
-        + 2 + strlen(response.body)
-    );
-    
-    sprintf(data, 
-        "HTTP/1.1 %d %s\n%s\n \n%s",
+    memset(buffer, 0, BUFFER_SIZE);
+    sprintf(buffer, 
+        "HTTP/1.1 %d %s\r\n%s\r\n",
         response.code, response.status,
-        response.headers, response.body
+        response.headers
     );
+    size_t size = strlen(buffer);
 
-    return data;
+    memcpy(buffer + size, response.body, response.body_size);
+    size += response.body_size;
+    
+    return size;
+}
+
+void write_string(Response *response, char *string)
+{
+    response->body_size = strlen(string);
+    response->body = malloc(response->body_size);
+    strcpy(response->body, string);
 }

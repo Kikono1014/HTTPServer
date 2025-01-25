@@ -5,9 +5,9 @@ OUT = $(BINDIR)$(BINNAME)
 FILES = ./request/request.c ./response/response.c ./main.c
 
 build: $(FILES)
-	gcc $(FILES) -o $(OUT)
+	gcc $(FILES) -o $(OUT);
 
 run:
 	make build;
-	printf "\n\n"
-	$(OUT)
+	printf "\n\n";
+	$(OUT);
