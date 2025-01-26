@@ -3,7 +3,6 @@
 
 #include <stdlib.h>
 #include "../request/request.h"
-#include "../consts.h"
 
 typedef struct 
 {
@@ -17,7 +16,7 @@ typedef struct
 
 
 Response build_response(Request request);
-size_t compile_response(u_int8_t buffer[BUFFER_SIZE], Response response);
+size_t compile_response(u_int8_t *buffer, Response response);
 void respond_string(Response *response, char* string);
 void respond_file(Response *response, char* path);
 

@@ -63,7 +63,7 @@ int setup_socket()
 void cleanup()
 {
     printf("Cleaning\n");
-    printf("%d\n", close(server_sock));
+    close(server_sock);
 }
 void interrupt(int error) { exit(error); }
 
@@ -80,9 +80,10 @@ int main(int argc, char const *argv[])
     socklen_t addr_size = sizeof(client_addr);
 
 
+    uint8_t *buffer = malloc(BUFFER_SIZE);
+    memset(buffer, 0, BUFFER_SIZE);
     while (1)
     {
-        uint8_t buffer[BUFFER_SIZE] = {0};
         //* Establishing connection
         client_fd = accept(server_sock, (struct sockaddr*)&client_addr, &addr_size);
         if (client_fd < 0) {
@@ -114,6 +115,11 @@ int main(int argc, char const *argv[])
         
         //TODO deal with connections
         close(client_fd);
+
+        free(request.headers);
+        free(request.body);
+
+        memset(buffer, 0, BUFFER_SIZE);
     }
 
 
