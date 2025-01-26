@@ -11,3 +11,8 @@ run:
 	make build;
 	printf "\n\n";
 	$(OUT);
+
+leaks:
+	gcc $(FILES);
+	valgrind --leak-check=full ./a.out;
+	rm a.out

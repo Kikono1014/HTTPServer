@@ -2,6 +2,7 @@
 #define RESPONSE_H
 
 #include <stdlib.h>
+#include "../request/request.h"
 #include "../consts.h"
 
 typedef struct 
@@ -15,7 +16,9 @@ typedef struct
 
 
 
-size_t build_response(u_int8_t buffer[BUFFER_SIZE], Response response);
-void write_string(Response *response, char* string);
+Response build_response(Request request);
+size_t compile_response(u_int8_t buffer[BUFFER_SIZE], Response response);
+void respond_string(Response *response, char* string);
+void respond_file(Response *response, char* path);
 
 #endif
