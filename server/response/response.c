@@ -22,17 +22,10 @@ size_t read_file(char *path, uint8_t **buffer)
 {
     FILE *f = fopen(path, "rb");
 
-    printf("1\n");
-    struct stat *stat_buffer;
-    printf("2\n");
-    stat_buffer = malloc(sizeof(struct stat));
-    printf("3\n");
+    struct stat *stat_buffer = malloc(sizeof(struct stat));
     fstat(fileno(f), stat_buffer);
-    printf("4\n");
     size_t fsize = stat_buffer->st_size;
-    printf("5\n");
     free(stat_buffer);
-    printf("6\n");
 
     printf("%zu\n", fsize);
     *buffer = malloc(fsize);
